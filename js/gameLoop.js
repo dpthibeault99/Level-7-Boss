@@ -13,25 +13,23 @@ var pointer = new gameObject(450, 450, 50, 100)
 function animate()
 {
     context.clearRect(0,0,canvas.width, canvas.height);
+    orbit();
 
     player.drawCircle();// works
     pointer.drawTriangle();
     player.move();
-    orbit();
 
 
 }
 
+var orbitAngle = 0;
+
 function orbit()
 {
-    var speed = 0.02;
-    var angle = pointer.angle;
+  var speed = 0.02;
 
+    pointer.x = player.x + player.width / 2 * Math.cos(orbitAngle);
+    pointer.y = player.y + player.width / 2 * Math.sin(orbitAngle);
 
-    pointer.x = player.x + player.width/2 * Math.cos(angle);
-    pointer.y = player.y + player.width/2 * Math.sin(angle);
-
-    angle += speed;
-
-
+    orbitAngle += speed;
 }
