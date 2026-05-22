@@ -4,6 +4,7 @@ var context = canvas.getContext("2d");
 // time and frames
 var interval = 1000/60;
 var timer = setInterval(animate, interval);
+var score = 0;
 
 var player = new gameObject(canvas.width/2, canvas.height/2, 75, 75, "#ff0000");
 var pointer = new gameObject(450, 450, 50, 100);
@@ -17,9 +18,9 @@ var rightTargets = [];
 var bottomTargets = [];
 var numTargets = 3;
 
-// makeLeftTargets();
-// makeTopTargets();
-// makeRightTargets();
+makeLeftTargets();
+makeTopTargets();
+makeRightTargets();
 makeBottomTargets();
 
 
@@ -29,6 +30,11 @@ var bullets = [];
 function animate()
 {
     context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // the score
+	context.fillStyle = "#b700f4";
+    context.font = "30px Arial";
+    context.fillText("Score: "+ score, 400, 50);
 
     orbit();
     wasd();
@@ -268,6 +274,8 @@ function hitTargets()
         {
             if(bullets[i].hitTestObject(leftTargets[j]))
             {
+                score++;
+
                 bullets.splice(i, 1);
                 leftTargets.splice(j, 1);
 
@@ -292,6 +300,8 @@ function hitTargets()
         {
             if(bullets[i].hitTestObject(topTargets[j]))
             {
+                score++;
+
                 bullets.splice(i, 1);
                 topTargets.splice(j, 1);
 
@@ -315,6 +325,7 @@ function hitTargets()
         {
             if(bullets[i].hitTestObject(rightTargets[j]))
             {
+                score++;
                 bullets.splice(i, 1);
                 rightTargets.splice(j, 1);
 
@@ -326,6 +337,29 @@ function hitTargets()
                 target.vy = 0;
 
                 rightTargets.push(target);
+
+                break;
+            }
+        }
+    }
+    // BOTTOM TARGETS
+    for(var i = 0; i < bullets.length; i++)
+    {
+        for(var j = 0; j < bottomTargets.length; j++)
+        {
+            if(bullets[i].hitTestObject(bottomTargets[j]))
+            {
+                score++;
+                bullets.splice(i, 1);
+                bottomTargets.splice(j, 1);
+
+                i--;
+
+                var target = new gameObject(rand(0, canvas.width), canvas.height, 20, 20, "#000000");
+
+                target.vx = 0;
+                target.vy = -rand(2, 4);
+                bottomTargets.push(target);
 
                 break;
             }
