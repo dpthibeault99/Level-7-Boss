@@ -14,9 +14,9 @@ var frictionY = .9;
 var gravity = 1;
 
 var leftTargets=[];
-var rightTargets=[];
-var topTargets=[];
-var bottomTargets=[];
+// var rightTargets=[];
+// var topTargets=[];
+// var bottomTargets=[];
 var numTargets =3;
 
     makeLeftTargets();
@@ -121,12 +121,12 @@ function makeLeftTargets() // make targets
 {
     for(var i = 0; i < numTargets; i++)
     {
-        var target = new gameObject(10, rand(0, canvas.height), 10, 10, "#000000");
+        var target = new gameObject(10, rand(0, canvas.height), 20, 20, "#000000");
 
         target.owner = "left";
 
-        target.force = 8;
-        target.vx = (rand(1,3) + 1) * target.force;
+        target.force = 2;
+        target.vx = rand(1,2) + 1 * target.force;
         target.vy = 0;
 
         leftTargets.push(target);
@@ -137,7 +137,7 @@ function makeLeftTargets() // make targets
         //     leftTargets.splice[i];
         //     leftTargets.push(target);
  
-        // } // moved to drawTragets
+        // } // moved to drawTragets =========
     }
 }
 
@@ -153,12 +153,11 @@ function drawTargets() // draw them and move them
             leftTargets.splice(i, 1);
             i--;
 
-            var target = new gameObject(10, rand(0, canvas.height), 10, 10, "#000000");
+            var target = new gameObject(10, rand(0, canvas.height), 20, 20, "#000000");
 
-            target.owner = "left";
-            target.force = 8;
-            target.vx = (rand(1,3) + 1) * target.force;
-            target.vy = 0;
+              target.force = 2;
+                target.vx = rand(1,2) + 1 * target.force;
+                target.vy = 0;
 
             leftTargets.push(target);
         }
