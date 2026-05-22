@@ -180,18 +180,30 @@ function gameObject(x,y,w,h, color)
         return false
     }
 
-    this.hitTestPoint = function(obj) // NEW
+    this.hitTestPoint = function(obj)
     {
         if(obj.x >= this.left().x &&
            obj.x <= this.right().x &&
            obj.y >= this.top().y &&
            obj.y <= this.bottom().y 
         )
-           {
-            return true;
-           }
-           return false;
+        {
+        return true;
+        }
+        return false;
     }
+    this.hitTestObject = function(obj)
+	{
+		if(this.left().x <= obj.right().x && 
+		   this.right().x >= obj.left().x &&
+		   this.top().y <= obj.bottom().y &&
+		   this.bottom().y >= obj.top().y)
+		{
+		return true
+		}
+		return false;
+	}
+		
 
     
 }
